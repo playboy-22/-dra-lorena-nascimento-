@@ -12,7 +12,6 @@ import {
   ArrowRight,
   Heart,
   Sparkles,
-  ChevronRight,
   Plus
 } from 'lucide-react';
 import { 
@@ -256,7 +255,7 @@ const App: React.FC = () => {
         </div>
       </Section>
 
-      {/* 7. BASTIDORES E DEDICAÇÃO (NOVO LAYOUT GRADE) */}
+      {/* 7. BASTIDORES E DEDICAÇÃO (LAYOUT PREMIUM MOSAICO) */}
       <Section className="bg-stone-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -264,21 +263,17 @@ const App: React.FC = () => {
             <p className="text-stone-500 font-light">Um pouco do meu dia a dia cuidando de sorrisos.</p>
           </div>
           
-          {/* Bento Grid Layout - Cada imagem é forçada a aparecer */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[200px] md:auto-rows-[250px]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[150px] md:auto-rows-[200px]">
             {GALLERY_IMAGES.map((img, i) => {
-              // Criando um layout variado para dar o aspecto premium
-              let gridClasses = "relative overflow-hidden rounded-2xl cursor-pointer group shadow-sm";
-              
-              if (i === 0) gridClasses += " col-span-2 row-span-2"; // Primeira foto em destaque
-              if (i === 1) gridClasses += " col-span-1 row-span-1";
-              if (i === 5) gridClasses += " col-span-2 row-span-1"; // Foto horizontal no meio
-              if (i === 8) gridClasses += " col-span-1 row-span-2"; // Foto vertical
+              let spanClass = "col-span-1 row-span-1";
+              if (i === 0) spanClass = "col-span-2 row-span-2";
+              if (i === 3) spanClass = "col-span-1 row-span-2";
+              if (i === 5) spanClass = "col-span-2 row-span-1";
               
               return (
                 <div 
                   key={i} 
-                  className={gridClasses}
+                  className={`relative overflow-hidden rounded-2xl cursor-pointer group shadow-sm ${spanClass}`}
                   onClick={() => setLightboxImage(img)}
                 >
                   <img 
@@ -287,12 +282,8 @@ const App: React.FC = () => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/40 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
                     <Plus className="text-white" size={32} strokeWidth={1} />
-                  </div>
-                  {/* Legend Overlay (Optional/Subtle) */}
-                  <div className="absolute bottom-3 left-3 bg-white/70 backdrop-blur-md px-2 py-1 rounded-lg text-[8px] font-bold text-stone-800 uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity">
-                    {i % 2 === 0 ? "Excelência" : "Cuidado"}
                   </div>
                 </div>
               );
@@ -300,7 +291,7 @@ const App: React.FC = () => {
           </div>
           
           <div className="mt-12 text-center">
-            <p className="text-stone-400 text-sm font-light italic">Clique nas imagens para ampliar e ver detalhes do meu ambiente clínico.</p>
+            <p className="text-stone-400 text-sm font-light italic">Clique para ampliar.</p>
           </div>
         </div>
       </Section>
